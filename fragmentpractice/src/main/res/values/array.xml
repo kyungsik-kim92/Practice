@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="array_main_tab_text">
+        <item>fragment1</item>
+        <item>fragment2</item>
+        <item>fragment3</item>
+        <item>fragment4</item>
+
+    </array>
+
+    <array name="array_main_tab_icon">
+        <item>@drawable/baseline_filter_1_24</item>
+        <item>@drawable/baseline_filter_2_24</item>
+        <item>@drawable/baseline_filter_3_24</item>
+        <item>@drawable/baseline_filter_4_24</item>
+    </array>
+
+</resources>
