@@ -13,7 +13,7 @@ class BChildFragment2 : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentBChild2Binding.inflate(inflater, container, false)
         return binding.root
     }

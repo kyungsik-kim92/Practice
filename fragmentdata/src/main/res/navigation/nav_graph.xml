@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_fragmentA_to_fragmentB"
             app:destination="@id/fragmentB" />
+        <action
+            android:id="@+id/action_fragmentA_to_BChildFragment1"
+            app:destination="@id/BChildFragment1" />
     </fragment>
     <fragment
         android:id="@+id/fragmentB"
@@ -35,5 +38,10 @@
         android:id="@+id/BChildFragment1"
         android:name="com.example.fragmentdata.BChildFragment1"
         android:label="fragment_b_child1"
-        tools:layout="@layout/fragment_b_child1" />
+        tools:layout="@layout/fragment_b_child1" >
+        <argument
+            android:name="msg"
+            app:argType="string"
+            android:defaultValue='clicked' />
+    </fragment>
 </navigation>

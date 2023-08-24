@@ -1,17 +1,20 @@
 package com.example.fragmentdata
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.fragmentdata.databinding.FragmentBChild1Binding
 
 class BChildFragment1 : Fragment() {
 
     private lateinit var binding: FragmentBChild1Binding
+    private val args by navArgs<BChildFragment1Args>()
 
     private val bViewModel by viewModels<BViewModel>(
         ownerProducer = {requireParentFragment()},
@@ -35,7 +38,7 @@ class BChildFragment1 : Fragment() {
 
 
         bViewModel.sendValueLiveData.observe(viewLifecycleOwner) {
-            binding.tvChildFragment1.text = it
+            binding.tvChildFragment1.text = args.msg
 
         }
     }

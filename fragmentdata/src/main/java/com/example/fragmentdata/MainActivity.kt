@@ -9,7 +9,7 @@ import com.example.fragmentdata.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
    private lateinit var binding : ActivityMainBinding
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
 
 //   private val fragmentA = FragmentA()
 //   private val fragmentB = FragmentB()
