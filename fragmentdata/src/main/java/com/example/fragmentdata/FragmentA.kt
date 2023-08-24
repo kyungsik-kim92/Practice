@@ -14,11 +14,11 @@ class FragmentA : Fragment() {
     private lateinit var binding : FragmentABinding
 
 
-    private val mainViewModel by activityViewModels<MainViewModel>()
-
-    private val aViewModel by lazy {
-        ViewModelProvider(requireActivity())[AViewModel::class.java]
-    }
+//    private val mainViewModel by activityViewModels<MainViewModel>()
+//
+//    private val aViewModel by lazy {
+//        ViewModelProvider(requireActivity())[AViewModel::class.java]
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,15 +32,15 @@ class FragmentA : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        aViewModel.sendValueLiveData.observe(viewLifecycleOwner) {
-            mainViewModel.sendData(it)
-        }
-
-
-        binding.tvFragmentA.setOnClickListener {
-            aViewModel.sendData("Clicked")
-
-        }
+//        aViewModel.sendValueLiveData.observe(viewLifecycleOwner) {
+//            mainViewModel.sendData(it)
+//        }
+//
+//
+//        binding.tvFragmentA.setOnClickListener {
+//            aViewModel.sendData("Clicked")
+//
+//        }
 
 
     }

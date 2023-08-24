@@ -65,7 +65,7 @@ class BookFragment : Fragment() {
         OnBackPressedCallback(webView.isEnabled) {
         override fun handleOnBackPressed() {
             if(webView.canGoBack()){
-                // 웹싸이트에서 뒤로 갈 페이지가 존재 할 경우
+
                 webView.goBack()
             }
             else{

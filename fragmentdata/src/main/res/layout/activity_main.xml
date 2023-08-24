@@ -6,27 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
-        android:id="@+id/frameA"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/frameB"
-        app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
-        android:id="@+id/frameB"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frameA">
-    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
