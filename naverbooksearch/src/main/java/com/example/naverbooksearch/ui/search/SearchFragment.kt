@@ -3,7 +3,6 @@ package com.example.naverbooksearch.ui.search
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.naverbooksearch.R
-import com.example.naverbooksearch.SearchFragmentDirections
 import com.example.naverbooksearch.adapter.SearchBookAdapter
 import com.example.naverbooksearch.base.BaseFragment
 import com.example.naverbooksearch.databinding.FragmentSearchBinding
@@ -12,14 +11,13 @@ class SearchFragment :
     BaseFragment<FragmentSearchBinding, SearchViewState>(R.layout.fragment_search) {
 
     private val searchBookAdapter = SearchBookAdapter(onItemClick = {
-        viewModel
+        viewModel.routeBook(it)
 
     })
 
     override val viewModel: SearchViewModel by viewModels(
         factoryProducer = { SearchViewModelProviderFactory() }
     )
-
 
 
 

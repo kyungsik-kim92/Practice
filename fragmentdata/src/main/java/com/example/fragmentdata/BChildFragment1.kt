@@ -17,11 +17,9 @@ class BChildFragment1 : Fragment() {
     private val args by navArgs<BChildFragment1Args>()
 
     private val bViewModel by viewModels<BViewModel>(
-        ownerProducer = {requireParentFragment()},
-        factoryProducer = {BViewModelFactory()}
+        ownerProducer = { requireParentFragment() },
+        factoryProducer = { BViewModelFactory() }
     )
-
-
 
 
     override fun onCreateView(
