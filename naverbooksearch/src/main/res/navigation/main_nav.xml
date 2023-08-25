@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_search"
-        android:name="com.example.naverbooksearch.SearchFragment"
+        android:name="com.example.naverbooksearch.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_book"
-        android:name="com.example.naverbooksearch.BookFragment"
+        android:name="com.example.naverbooksearch.ui.book.BookFragment"
         android:label="fragment_book"
         tools:layout="@layout/fragment_book" >
         <argument

@@ -1,4 +1,4 @@
-package com.example.naverbooksearch
+package com.example.naverbooksearch.ui.book
 
 import android.annotation.SuppressLint
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.naverbooksearch.api
+package com.example.naverbooksearch.network
 
 import com.example.naverbooksearch.model.Meta
 import retrofit2.Response

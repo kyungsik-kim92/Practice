@@ -1,4 +1,4 @@
-package com.example.naverbooksearch.repo
+package com.example.naverbooksearch.data.repo
 
 import com.example.naverbooksearch.model.Meta
 import retrofit2.Call

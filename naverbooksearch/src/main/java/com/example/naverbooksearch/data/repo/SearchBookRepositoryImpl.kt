@@ -1,7 +1,6 @@
-package com.example.naverbooksearch.repo
+package com.example.naverbooksearch.data.repo
 
 import com.example.naverbooksearch.model.Meta
-import com.example.naverbooksearch.repo.SearchBookRepository
 import com.example.naverbooksearch.util.RetrofitInstance
 import retrofit2.Response
 

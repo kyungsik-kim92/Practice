@@ -1,7 +1,7 @@
 package com.example.naverbooksearch.util
 
 
-import com.example.naverbooksearch.api.BookApiService
+import com.example.naverbooksearch.network.BookApiService
 import com.example.naverbooksearch.constants.NaverConstants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

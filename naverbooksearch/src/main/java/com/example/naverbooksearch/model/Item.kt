@@ -24,4 +24,16 @@ data class Item(
     val publisher: String,
     @SerializedName("title")
     val title: String
-) : Parcelable
+) : Parcelable{
+
+    fun toTextAuthor(): String{
+        return "지은이: $author"
+
+    }
+
+
+    fun pubYear() : String{
+        return pubdate.substring(0 until 4)
+    }
+
+}

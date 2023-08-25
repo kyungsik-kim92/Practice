@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.naverbooksearch.databinding.ItemBookBinding
 import com.example.naverbooksearch.model.Item
 
-class SearchBookAdapter : RecyclerView.Adapter<SearchBookViewHolder>() {
+class SearchBookAdapter(val onItemClick : (Item) -> Unit) : RecyclerView.Adapter<SearchBookViewHolder>() {
 
     private val items = mutableListOf<Item>()
 
@@ -20,17 +20,9 @@ class SearchBookAdapter : RecyclerView.Adapter<SearchBookViewHolder>() {
     override fun getItemCount(): Int = items.size
 
 
-    private var onItemClickListener: ((Item) -> Unit)? = null
-    fun setOnItemClickListener(listener: (Item) -> Unit) {
-        onItemClickListener = listener
-
-    }
 
     override fun onBindViewHolder(holder: SearchBookViewHolder, position: Int) {
-        holder.bind(items[position])
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.let { it(items[position]) }
-        }
+        holder.bind(items[position],onItemClick)
     }
 
     @SuppressLint("NotifyDataSetChanged")
