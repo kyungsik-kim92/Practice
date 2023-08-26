@@ -26,5 +26,12 @@
         <argument
             android:name="item"
             app:argType="com.example.naverbooksearch.model.Item" />
+        <action
+            android:id="@+id/action_fragment_book_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.naverbooksearch.ui.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" />
 </navigation>

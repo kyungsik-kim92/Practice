@@ -1,5 +1,6 @@
 package com.example.naverbooksearch.ui.search
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.naverbooksearch.base.BaseViewModel
@@ -10,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(private val searchBookRepository: SearchBookRepository) : BaseViewModel() {
 
-        val inputSearchLiveData = MutableLiveData("")
+    val inputSearchLiveData = MutableLiveData("")
 
 
     fun searchBooks() = viewModelScope.launch {
@@ -34,11 +35,12 @@ class SearchViewModel(private val searchBookRepository: SearchBookRepository) : 
 
     }
 
-    fun routeBook(item: Item) = viewModelScope.launch{
+    fun routeBook(item: Item) = viewModelScope.launch {
         onChangedViewState(SearchViewState.RouteBook(item))
 
 
     }
+
 
 
     companion object {

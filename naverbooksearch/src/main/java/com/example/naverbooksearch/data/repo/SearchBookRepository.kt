@@ -1,5 +1,8 @@
 package com.example.naverbooksearch.data.repo
 
+import androidx.lifecycle.LiveData
+import androidx.room.Delete
+import com.example.naverbooksearch.model.Item
 import com.example.naverbooksearch.model.Meta
 import retrofit2.Call
 import retrofit2.Response
@@ -15,6 +18,8 @@ interface SearchBookRepository {
         start: Int,
         sort: String
     ) : Response<Meta>
+
+
 
 
 }
