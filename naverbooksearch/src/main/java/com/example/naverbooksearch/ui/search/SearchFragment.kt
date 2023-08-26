@@ -13,8 +13,8 @@ import com.example.naverbooksearch.databinding.FragmentSearchBinding
 class SearchFragment :
     BaseFragment<FragmentSearchBinding, SearchViewState>(R.layout.fragment_search) {
 
-    private val database = BookSearchDatabase.getInstance(requireContext())
-    val favoriteBookRepository = FavoriteBookRepositoryImpl(database)
+//    private val database = BookSearchDatabase.getInstance(requireContext())
+//    val favoriteBookRepository = FavoriteBookRepositoryImpl(database)
 
 
     private val searchBookAdapter = SearchBookAdapter(onItemClick = {

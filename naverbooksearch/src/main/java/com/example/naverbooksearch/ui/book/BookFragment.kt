@@ -10,12 +10,9 @@ import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.naverbooksearch.databinding.FragmentBookBinding
 import com.example.naverbooksearch.ui.favorite.FavoriteViewModel
-import com.example.naverbooksearch.ui.favorite.FavoriteViewModelProviderFactory
-import com.example.naverbooksearch.ui.search.SearchViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlin.system.exitProcess
 
@@ -26,9 +23,7 @@ class BookFragment : Fragment() {
 
     private val args by navArgs<BookFragmentArgs>()
 
-    private val favoriteViewModel : FavoriteViewModel by viewModels(
-        factoryProducer = {FavoriteViewModelProviderFactory()}
-    )
+    private val favoriteViewModel : FavoriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

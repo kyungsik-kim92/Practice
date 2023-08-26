@@ -15,6 +15,7 @@ import com.example.naverbooksearch.databinding.FragmentFavoriteBinding
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
     private val favoriteViewModel : FavoriteViewModel by viewModels(
+//        factoryProducer = {FavoriteViewModelProviderFactory()}
 
     )
     private val favoriteAdapter = FavoriteAdapter()
