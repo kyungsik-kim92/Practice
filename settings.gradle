@@ -16,6 +16,5 @@ rootProject.name = "AssignmentPractice"
 include ':app'
 include ':fragmentpractice'
 include ':marvelapipractice'
-include ':kakaobooksearch'
 include ':naverbooksearch'
 include ':fragmentdata'
