@@ -1,22 +1,30 @@
 package com.example.naverbooksearch.data.repo
 
-import androidx.lifecycle.LiveData
-import com.example.naverbooksearch.data.BookSearchDatabase
-import com.example.naverbooksearch.model.Item
+import com.example.naverbooksearch.room.BookSearchDao
+import com.example.naverbooksearch.room.BookmarkItem
 
-class FavoriteBookRepositoryImpl(private var db : BookSearchDatabase) :FavoriteBookRepository {
+class FavoriteBookRepositoryImpl(private var bookSearchDao: BookSearchDao) :
+    FavoriteBookRepository {
 
-    override suspend fun insertBook(item: Item) {
-        db.bookSearchDao().insertBook(item)
 
+    override suspend fun insertBook(item: BookmarkItem) {
+        bookSearchDao.insertBook(item)
     }
 
-    override suspend fun deleteBook(item: Item) {
-        db.bookSearchDao().deleteBook(item)
+    override suspend fun deleteBook(item: BookmarkItem) {
+        bookSearchDao.deleteBook(item)
     }
 
-    override fun getFavoriteBooks(): LiveData<List<Item>> {
-        return db.bookSearchDao().getFavoriteBooks()
+
+    override fun getFavoriteBooks(): List<BookmarkItem> {
+        return bookSearchDao.getFavoriteBooks()
     }
 
+    companion object {
+        private var INSTANCE: FavoriteBookRepositoryImpl? = null
+
+        fun getInstance(bookSearchDao: BookSearchDao): FavoriteBookRepository =
+            INSTANCE ?: FavoriteBookRepositoryImpl(bookSearchDao).also { INSTANCE = it }
+    }
 }
+

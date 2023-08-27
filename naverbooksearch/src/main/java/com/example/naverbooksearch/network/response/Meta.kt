@@ -1,11 +1,11 @@
-package com.example.naverbooksearch.model
+package com.example.naverbooksearch.network.response
 import com.google.gson.annotations.SerializedName
 
 data class Meta(
     @SerializedName("display")
     val display: Int,
     @SerializedName("items")
-    val items: List<Item>,
+    val naverBookItems: List<NaverBookItem>,
     @SerializedName("lastBuildDate")
     val lastBuildDate: String,
     @SerializedName("start")

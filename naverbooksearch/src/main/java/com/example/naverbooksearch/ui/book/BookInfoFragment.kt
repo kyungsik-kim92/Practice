@@ -10,26 +10,31 @@ import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.naverbooksearch.databinding.FragmentBookBinding
-import com.example.naverbooksearch.ui.favorite.FavoriteViewModel
+import com.example.naverbooksearch.databinding.FragmentBookInfoBinding
+import com.example.naverbooksearch.util.BookInfoViewModelFactory
+import com.example.naverbooksearch.util.InjectUtil
 import com.google.android.material.snackbar.Snackbar
-import kotlin.system.exitProcess
 
 
-class BookFragment : Fragment() {
+class BookInfoFragment : Fragment() {
 
-    lateinit var binding: FragmentBookBinding
+    private lateinit var binding: FragmentBookInfoBinding
 
-    private val args by navArgs<BookFragmentArgs>()
+    private val args by navArgs<BookInfoFragmentArgs>()
 
-    private val favoriteViewModel : FavoriteViewModel by viewModels()
+    private val bookInfoViewModel: BookInfoViewModel by viewModels(
+        factoryProducer = {
+            BookInfoViewModelFactory(InjectUtil.provideFavoriteBookRepository(requireContext()))
+        }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentBookBinding.inflate(inflater, container, false)
+    ): View {
+        binding = FragmentBookInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,18 +49,17 @@ class BookFragment : Fragment() {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
             loadUrl(item.link)
-
         }
-            requireActivity().onBackPressedDispatcher.addCallback(
-                viewLifecycleOwner, WebViewOnBackPressedCallback(binding.webview)
-            )
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, WebViewOnBackPressedCallback(binding.webview, onBackPress = {
+                findNavController().popBackStack()
+            })
+        )
 
-        binding.fabFavorite.setOnClickListener{
-            favoriteViewModel.saveBook(item)
-            Snackbar.make(view,"Book has saved", Snackbar.LENGTH_SHORT).show()
+        binding.fabFavorite.setOnClickListener {
+            bookInfoViewModel.addBookmark(item)
+            Snackbar.make(view, "Book has saved", Snackbar.LENGTH_SHORT).show()
         }
-
-
     }
 
 
@@ -70,18 +74,17 @@ class BookFragment : Fragment() {
     }
 
 
-    class WebViewOnBackPressedCallback(private val webView: WebView) :
+    class WebViewOnBackPressedCallback(
+        private val webView: WebView,
+        private val onBackPress: () -> Unit
+    ) :
         OnBackPressedCallback(webView.isEnabled) {
         override fun handleOnBackPressed() {
-            if(webView.canGoBack()){
-
+            if (webView.canGoBack()) {
                 webView.goBack()
-            }
-            else{
-                exitProcess(0)
+            } else {
+                onBackPress()
             }
         }
-
-
     }
 }

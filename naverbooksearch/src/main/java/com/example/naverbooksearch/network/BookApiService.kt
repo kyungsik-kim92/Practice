@@ -1,6 +1,6 @@
 package com.example.naverbooksearch.network
 
-import com.example.naverbooksearch.model.Meta
+import com.example.naverbooksearch.network.response.Meta
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

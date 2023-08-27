@@ -1,11 +1,10 @@
 package com.example.naverbooksearch.ui.search
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.naverbooksearch.base.BaseViewModel
 import com.example.naverbooksearch.constants.NaverConstants
-import com.example.naverbooksearch.model.Item
+import com.example.naverbooksearch.network.response.NaverBookItem
 import com.example.naverbooksearch.data.repo.SearchBookRepository
 import kotlinx.coroutines.launch
 
@@ -27,20 +26,13 @@ class SearchViewModel(private val searchBookRepository: SearchBookRepository) : 
             )
             if (response.isSuccessful) {
                 response.body()?.let { body ->
-                    onChangedViewState(SearchViewState.GetSearchResult(body.items))
+                    onChangedViewState(SearchViewState.GetSearchResult(body.naverBookItems))
                 }
             }
         }
 
 
     }
-
-    fun routeBook(item: Item) = viewModelScope.launch {
-        onChangedViewState(SearchViewState.RouteBook(item))
-
-
-    }
-
 
 
     companion object {

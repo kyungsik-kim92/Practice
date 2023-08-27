@@ -1,17 +1,13 @@
-package com.example.naverbooksearch.model
+package com.example.naverbooksearch.network.response
 
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.example.naverbooksearch.room.BookmarkItem
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "book")
-data class Item(
-    @SerializedName("id")
-    @PrimaryKey
-    val id : Int ,
+data class NaverBookItem(
     @SerializedName("author")
     val author: String,
     @SerializedName("description")
@@ -30,16 +26,26 @@ data class Item(
     val publisher: String,
     @SerializedName("title")
     val title: String
-) : Parcelable{
+) : Parcelable {
 
-    fun toTextAuthor(): String{
+    fun toTextAuthor(): String {
         return "지은이: $author"
 
     }
 
-
-    fun pubYear() : String{
+    fun pubYear(): String {
         return pubdate.substring(0 until 4)
     }
 
+    fun toBookmarkItem() = BookmarkItem(
+        author = author,
+        description = description,
+        discount = discount,
+        image = image,
+        isbn = isbn,
+        link = link,
+        pubdate = pubdate,
+        publisher = publisher,
+        title = title
+    )
 }

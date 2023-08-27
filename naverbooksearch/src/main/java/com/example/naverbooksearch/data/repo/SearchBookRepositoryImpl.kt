@@ -1,9 +1,6 @@
 package com.example.naverbooksearch.data.repo
 
-import androidx.lifecycle.LiveData
-import com.example.naverbooksearch.data.BookSearchDatabase
-import com.example.naverbooksearch.model.Item
-import com.example.naverbooksearch.model.Meta
+import com.example.naverbooksearch.network.response.Meta
 import com.example.naverbooksearch.util.RetrofitInstance
 import retrofit2.Response
 
@@ -20,5 +17,12 @@ class SearchBookRepositoryImpl : SearchBookRepository {
         return RetrofitInstance.api.searchBooks(id, secretKey, query, display, start, sort)
     }
 
+
+    companion object {
+        private var INSTANCE: SearchBookRepositoryImpl? = null
+
+        fun getInstance(): SearchBookRepository =
+            INSTANCE ?: SearchBookRepositoryImpl().also { INSTANCE = it }
+    }
 
 }

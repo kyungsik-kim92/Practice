@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="bookItem"
-            type="com.example.naverbooksearch.model.Item" />
+            type="com.example.naverbooksearch.room.BookmarkItem" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -19,11 +20,11 @@
 
 
             <ImageView
-                app:imageUrl="@{bookItem.image}"
                 android:id="@+id/image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@mipmap/ic_launcher"
+                app:imageUrl="@{bookItem.image}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
@@ -34,7 +35,6 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{bookItem.title}"
                 android:autoSizeMaxTextSize="20dp"
                 android:autoSizeMinTextSize="8dp"
                 android:autoSizeTextType="uniform"
@@ -42,6 +42,7 @@
                 android:gravity="center"
                 android:lines="1"
                 android:padding="5dp"
+                android:text="@{bookItem.title}"
                 app:layout_constraintBottom_toTopOf="@id/author"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image"
@@ -51,23 +52,23 @@
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autoSizeMinTextSize="8dp"
                 android:gravity="start"
                 android:text="@{bookItem.toTextAuthor()}"
-                android:autoSizeMinTextSize="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/title" />
 
             <TextView
                 android:id="@+id/pubdate"
-                android:text="@{bookItem.pubYear()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:autoSizeMinTextSize="8dp"
+                android:gravity="start"
+                android:text="@{bookItem.pubYear()}"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/author"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/author" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

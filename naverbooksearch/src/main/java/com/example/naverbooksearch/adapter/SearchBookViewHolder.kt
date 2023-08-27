@@ -1,18 +1,18 @@
 package com.example.naverbooksearch.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.naverbooksearch.databinding.ItemBookBinding
-import com.example.naverbooksearch.model.Item
+import com.example.naverbooksearch.databinding.ItemSearchBinding
+import com.example.naverbooksearch.network.response.NaverBookItem
 
-class SearchBookViewHolder (private val binding: ItemBookBinding) :
+class SearchBookViewHolder (private val binding: ItemSearchBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(item: Item,onItemClick :(Item) -> Unit) {
-        binding.bookItem = item
+    fun bind(naverBookItem: NaverBookItem, onItemClick :(NaverBookItem) -> Unit) {
+        binding.bookItem = naverBookItem
 
         itemView.setOnClickListener {
-            onItemClick(item)
+            onItemClick(naverBookItem)
         }
     }
 }

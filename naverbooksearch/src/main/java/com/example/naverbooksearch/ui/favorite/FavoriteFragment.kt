@@ -7,18 +7,31 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.naverbooksearch.R
-import com.example.naverbooksearch.adapter.FavoriteAdapter
+import com.example.naverbooksearch.adapter.BookmarkAdapter
 import com.example.naverbooksearch.databinding.FragmentFavoriteBinding
+import com.example.naverbooksearch.util.FavoriteViewModelFactory
+import com.example.naverbooksearch.util.InjectUtil
 
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
-    private val favoriteViewModel : FavoriteViewModel by viewModels(
-//        factoryProducer = {FavoriteViewModelProviderFactory()}
 
+
+    private val favoriteViewModel: FavoriteViewModel by viewModels(
+        factoryProducer = {
+            FavoriteViewModelFactory(InjectUtil.provideFavoriteBookRepository(requireContext()))
+        }
     )
-    private val favoriteAdapter = FavoriteAdapter()
+    private val bookmarkAdapter = BookmarkAdapter(
+        onDelete = {
+            favoriteViewModel.deleteBook(it)
+        }
+    )
+
+    override fun onResume() {
+        super.onResume()
+        favoriteViewModel.getFavoriteBooks()
+    }
 
 
     override fun onCreateView(
@@ -33,13 +46,9 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        binding.rvFavoriteBooks.adapter = favoriteAdapter
-
-        favoriteViewModel.favoriteBooks.observe(viewLifecycleOwner){
-            favoriteAdapter.addAll(it)
+        binding.rvFavoriteBooks.adapter = bookmarkAdapter
+        favoriteViewModel.favoriteBooks.observe(viewLifecycleOwner) {
+            bookmarkAdapter.addAll(it)
         }
-
     }
 }

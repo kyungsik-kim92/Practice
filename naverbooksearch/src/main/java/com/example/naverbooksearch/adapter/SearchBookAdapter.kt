@@ -4,31 +4,31 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.naverbooksearch.databinding.ItemBookBinding
-import com.example.naverbooksearch.model.Item
+import com.example.naverbooksearch.databinding.ItemSearchBinding
+import com.example.naverbooksearch.network.response.NaverBookItem
 
-class SearchBookAdapter(val onItemClick : (Item) -> Unit) : RecyclerView.Adapter<SearchBookViewHolder>() {
+class SearchBookAdapter(val onItemClick: (NaverBookItem) -> Unit) :
+    RecyclerView.Adapter<SearchBookViewHolder>() {
 
-    private val items = mutableListOf<Item>()
+    private val naverBookItems = mutableListOf<NaverBookItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchBookViewHolder {
-        val binding = ItemBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchBookViewHolder(binding)
 
     }
 
-    override fun getItemCount(): Int = items.size
-
+    override fun getItemCount(): Int = naverBookItems.size
 
 
     override fun onBindViewHolder(holder: SearchBookViewHolder, position: Int) {
-        holder.bind(items[position],onItemClick)
+        holder.bind(naverBookItems[position], onItemClick)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addAll(list: List<Item>) {
-        items.clear()
-        items.addAll(list)
+    fun addAll(list: List<NaverBookItem>) {
+        naverBookItems.clear()
+        naverBookItems.addAll(list)
         notifyDataSetChanged()
     }
 
