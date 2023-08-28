@@ -1,8 +1,9 @@
-package com.example.naverbooksearch.base
+package com.example.kakaopractice.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
@@ -33,5 +34,6 @@ abstract class BaseActivity<B : ViewDataBinding, VS : ViewState>(@LayoutRes priv
     }
 
     abstract fun onChangedViewState(viewState: VS)
+
 
 }

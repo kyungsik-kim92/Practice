@@ -1,4 +1,4 @@
-package com.example.kakaobooksearch
+package com.example.kakaopractice
 
 import org.junit.Test
 
