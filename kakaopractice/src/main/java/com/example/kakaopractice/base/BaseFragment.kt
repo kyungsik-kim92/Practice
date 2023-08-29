@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<B : ViewDataBinding,VS : ViewState>(@LayoutRes private val layoutId: Int) : Fragment(){
 
-    abstract val viewModel: BaseViewModel
+//    abstract val viewModel: BaseViewModel
 
     protected lateinit var binding: B
 
@@ -28,20 +28,20 @@ abstract class BaseFragment<B : ViewDataBinding,VS : ViewState>(@LayoutRes priva
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
-        initViewModel()
+//        initViewModel()
     }
 
     abstract fun initUi()
 
-    private fun initViewModel() {
-        viewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState ->
-            (viewState as? VS)?.let {
-                onChangedViewState(viewState)
-            }
-        }
-    }
+//    private fun initViewModel() {
+//        viewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState ->
+//            (viewState as? VS)?.let {
+//                onChangedViewState(viewState)
+//            }
+//        }
+//    }
 
-    abstract fun onChangedViewState(viewState: VS)
+//    abstract fun onChangedViewState(viewState: VS)
 
 
 }
