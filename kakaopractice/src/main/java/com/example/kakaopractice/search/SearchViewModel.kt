@@ -10,7 +10,8 @@ import com.example.kakaopractice.network.response.BookSearchData
 import com.example.kakaopractice.network.response.KakaoBookItem
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val searchBookRepository: SearchBookRepository) : ViewModel() {
+class SearchViewModel(private val searchBookRepository: SearchBookRepository) : BaseViewModel() {
+
     private val _searchResultLiveData = MutableLiveData<List<KakaoBookItem>>()
     val searchResultLiveData: LiveData<List<KakaoBookItem>> = _searchResultLiveData
 

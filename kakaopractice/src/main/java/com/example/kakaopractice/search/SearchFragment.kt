@@ -8,11 +8,12 @@ import com.example.kakaopractice.base.ViewState
 import com.example.kakaopractice.databinding.FragmentSearchBinding
 
 
-class SearchFragment : BaseFragment<FragmentSearchBinding,ViewState>(R.layout.fragment_search) {
+class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewState>(R.layout.fragment_search) {
 
-    private val viewModel: SearchViewModel by viewModels()
-   private lateinit var searchBookAdapter : SearchBookAdapter
-
+    override val viewModel: SearchViewModel by viewModels(
+        factoryProducer = { SearchViewModelProviderFactory() }
+    )
+    private lateinit var searchBookAdapter: SearchBookAdapter
 
 
     override fun initUi() {
@@ -28,9 +29,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding,ViewState>(R.layout.fr
         }
     }
 
+    override fun onChangedViewState(viewState: SearchViewState) {
+
+    }
 
 
-//    override fun onChangedViewState(viewState: ViewState) {
-//
-//    }
+
 }
