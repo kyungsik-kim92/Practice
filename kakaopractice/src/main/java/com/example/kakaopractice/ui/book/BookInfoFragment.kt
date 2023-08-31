@@ -20,36 +20,23 @@ import com.example.kakaopractice.util.BookInfoViewModelFactory
 import com.example.kakaopractice.util.InjectUtil
 import com.google.android.material.snackbar.Snackbar
 
-class BookInfoFragment : Fragment()
-
-//<FragmentBookInfoBinding,BookInfoViewState>(R.layout.fragment_book_info)
+class BookInfoFragment : BaseFragment<FragmentBookInfoBinding,BookInfoViewState>(R.layout.fragment_book_info)
 {
 
 
     private val args by navArgs<BookInfoFragmentArgs>()
-    private lateinit var binding : FragmentBookInfoBinding
 
-    private val bookInfoViewModel: BookInfoViewModel by viewModels(
+
+
+    override val viewModel: BookInfoViewModel by viewModels(
         factoryProducer = {
             BookInfoViewModelFactory(InjectUtil.providerBookMarkRepository(requireContext()))
         }
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentBookInfoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     @SuppressLint("SetJavaScriptEnabled")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+    override fun initUi() {
         val item = args.item
-
         binding.webview.apply {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
@@ -62,20 +49,16 @@ class BookInfoFragment : Fragment()
         )
 
         binding.fabFavorite.setOnClickListener {
-            bookInfoViewModel.addBookmark(item)
-            Snackbar.make(view, "Book has saved", Snackbar.LENGTH_SHORT).show()
+            viewModel.addBookMark(item)
+            Snackbar.make(requireView(), "Book has saved", Snackbar.LENGTH_SHORT).show()
         }
     }
 
 
-    override fun onPause() {
-        binding.webview.onPause()
-        super.onPause()
-    }
 
-    override fun onResume() {
-        binding.webview.onResume()
-        super.onResume()
+    override fun onChangedViewState(viewState: BookInfoViewState) {
+//
+//
     }
 
 

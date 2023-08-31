@@ -8,19 +8,6 @@ import com.example.kakaopractice.databinding.ActivityMainBinding
 import com.example.kakaopractice.ui.search.SearchFragment
 import com.example.kakaopractice.ui.search.SearchViewModel
 
-class MainActivity : AppCompatActivity(){
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : AppCompatActivity(R.layout.activity_main)
 
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
-
-
-    }
-
-}

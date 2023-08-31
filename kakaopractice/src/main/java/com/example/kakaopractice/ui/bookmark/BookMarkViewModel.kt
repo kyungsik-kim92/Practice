@@ -11,11 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository) : ViewModel() {
+class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository) : BaseViewModel() {
 
-    private val _bookMarkBooks = MutableLiveData<List<BookMarkItem>>()
-    val bookMarkBooks: LiveData<List<BookMarkItem>> = _bookMarkBooks
-
+//    private val bookMarkBooks = MutableLiveData<List<BookMarkItem>>()
 
     init {
         getFavoriteBooks()
@@ -30,13 +28,13 @@ class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository) : Vi
         getFavoriteBooks()
     }
 
-    fun getFavoriteBooks() {
+     fun getFavoriteBooks() {
         viewModelScope.launch(Dispatchers.IO) {
 
             val bookmarkList = bookMarkRepository.getFavoriteBooks()
 
             withContext(Dispatchers.Main) {
-                _bookMarkBooks.value = bookmarkList
+                onChangedViewState(BookMarkViewState.BookMarkResult(bookmarkList))
             }
         }
     }

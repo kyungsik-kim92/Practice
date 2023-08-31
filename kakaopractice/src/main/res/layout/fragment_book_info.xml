@@ -4,6 +4,14 @@
 
     <data>
 
+        <variable
+            name="bookItem"
+            type="com.example.kakaopractice.network.response.KakaoBookItem" />
+
+        <variable
+            name="viewModel"
+            type="com.example.kakaopractice.ui.book.BookInfoViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +38,8 @@
             android:src="@drawable/baseline_favorite_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+         <!--   android:onClick="@{()-> viewModel.addBookMark(bookItem)}"
+         데이터바인딩 시도해보려다가 실패했습니다-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,7 +4,6 @@ import androidx.fragment.app.viewModels
 import com.example.kakaopractice.R
 import com.example.kakaopractice.adapter.SearchBookAdapter
 import com.example.kakaopractice.base.BaseFragment
-import com.example.kakaopractice.base.ViewState
 import com.example.kakaopractice.databinding.FragmentSearchBinding
 import com.example.kakaopractice.home.HomeViewModel
 
@@ -18,22 +17,16 @@ class SearchFragment :
     private val homeViewModel by viewModels<HomeViewModel>(
         ownerProducer = { requireParentFragment() }
     )
-    private lateinit var searchBookAdapter: SearchBookAdapter
+
+       private val searchBookAdapter = SearchBookAdapter(onItemClick = {
+            homeViewModel.routeBookInfo(it)
+        })
 
 
     override fun initUi() {
-        searchBookAdapter = SearchBookAdapter(onItemClick = {
-            homeViewModel.routeBookInfo(it)
-        })
+        binding.viewModel = this@SearchFragment.viewModel
         binding.rvSearchResult.adapter = searchBookAdapter
 
-        binding.btnSearch.setOnClickListener {
-            viewModel.searchBooks(binding.etSearch.text.toString())
-
-        }
-        viewModel.searchResultLiveData.observe(viewLifecycleOwner) {
-            searchBookAdapter.addAll(it)
-        }
     }
 
     override fun onChangedViewState(viewState: SearchViewState) {

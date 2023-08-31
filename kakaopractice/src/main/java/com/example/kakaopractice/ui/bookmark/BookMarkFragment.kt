@@ -1,71 +1,45 @@
 package com.example.kakaopractice.ui.bookmark
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.kakaopractice.R
 import com.example.kakaopractice.adapter.BookMarkAdapter
+import com.example.kakaopractice.base.BaseFragment
 import com.example.kakaopractice.databinding.FragmentBookmarkBinding
 import com.example.kakaopractice.util.BookMarkViewModelFactory
 import com.example.kakaopractice.util.InjectUtil
 
-class BookMarkFragment :Fragment(){
-    private lateinit var binding: FragmentBookmarkBinding
+class BookMarkFragment :BaseFragment<FragmentBookmarkBinding,BookMarkViewState>(R.layout.fragment_bookmark){
 
-
-    private val bookMarkViewModel: BookMarkViewModel by viewModels(
+    override val viewModel: BookMarkViewModel by viewModels(
         factoryProducer = {
             BookMarkViewModelFactory(InjectUtil.providerBookMarkRepository(requireContext()))
         }
     )
     private val bookmarkAdapter = BookMarkAdapter(
         onDelete = {
-            bookMarkViewModel.deleteBook(it)
+            viewModel.deleteBook(it)
         }
     )
 
     override fun onResume() {
         super.onResume()
-        bookMarkViewModel.getFavoriteBooks()
+        viewModel.getFavoriteBooks()
     }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
-        return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initUi() {
         binding.rvFavoriteBooks.adapter = bookmarkAdapter
-        bookMarkViewModel.bookMarkBooks.observe(viewLifecycleOwner) {
-            bookmarkAdapter.addAll(it)
+    }
+
+    override fun onChangedViewState(viewState: BookMarkViewState) {
+        when(viewState){
+            is BookMarkViewState.BookMarkResult ->{
+                bookmarkAdapter.addAll(viewState.list)
+            }
         }
     }
 
 }
 
-//    BaseFragment<FragmentBookmarkBinding,BookMarkViewState>(R.layout.fragment_bookmark)
-//{
-//    override val viewModel: BookMarkViewModel(
-//
-//    )
-//
-//
-//    override fun initUi() {
-//
-//    }
-//
-//    override fun onChangedViewState(viewState: BookMarkViewState) {
-//
-//    }
-//}
+
+
