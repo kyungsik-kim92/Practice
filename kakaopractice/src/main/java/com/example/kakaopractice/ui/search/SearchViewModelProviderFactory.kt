@@ -1,4 +1,4 @@
-package com.example.kakaopractice.search
+package com.example.kakaopractice.ui.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

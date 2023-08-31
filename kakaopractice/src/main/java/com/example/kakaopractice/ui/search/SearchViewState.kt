@@ -1,4 +1,4 @@
-package com.example.kakaopractice.search
+package com.example.kakaopractice.ui.search
 
 import com.example.kakaopractice.base.ViewState
 import com.example.kakaopractice.network.response.KakaoBookItem

@@ -1,8 +1,15 @@
 package com.example.kakaopractice.network.response
 
 
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.kakaopractice.room.BookMarkItem
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+@Entity(tableName = "book")
 data class KakaoBookItem(
     @SerializedName("authors")
     val authors: List<String>,
@@ -28,4 +35,25 @@ data class KakaoBookItem(
     val translators: List<String>,
     @SerializedName("url")
     val url: String
-)
+) : Parcelable {
+    fun dateTime(): String {
+        return datetime.substring(0 until 4)
+    }
+
+
+    fun toBookmarkItem() = BookMarkItem(
+        authors = authors,
+        contents = contents,
+        datetime = datetime,
+        isbn = isbn,
+        price = price,
+        publisher = publisher,
+        salePrice = salePrice,
+        status = status,
+        thumbnail = thumbnail,
+        title = title,
+        translators = translators,
+        url = url
+    )
+
+}

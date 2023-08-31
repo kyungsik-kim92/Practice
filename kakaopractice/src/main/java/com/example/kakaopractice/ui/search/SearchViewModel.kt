@@ -1,4 +1,4 @@
-package com.example.kakaopractice.search
+package com.example.kakaopractice.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -8,11 +8,12 @@ class SearchBookViewHolder(private val binding: ItemSearchBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(kakaoBookItem: KakaoBookItem) {
+    fun bind(kakaoBookItem: KakaoBookItem,onItemClick:(KakaoBookItem) -> Unit) {
         binding.bookItem = kakaoBookItem
+        binding.author.text = kakaoBookItem.authors.toString()
 
-//        itemView.setOnClickListener {
-//            onItemClick(kakaoBookItem)
-//        }
+        itemView.setOnClickListener {
+            onItemClick(kakaoBookItem)
+        }
     }
 }
