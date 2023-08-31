@@ -1,4 +1,4 @@
-package com.example.kakaopractice.bookmark
+package com.example.kakaopractice.ui.bookmark
 
 import android.os.Bundle
 import android.view.LayoutInflater

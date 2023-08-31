@@ -7,7 +7,7 @@ import com.example.kakaopractice.SettingFragment
 import com.example.kakaopractice.adapter.FragmentPagerAdapter
 import com.example.kakaopractice.base.BaseFragment
 import com.example.kakaopractice.base.BaseViewModel
-import com.example.kakaopractice.bookmark.BookMarkFragment
+import com.example.kakaopractice.ui.bookmark.BookMarkFragment
 import com.example.kakaopractice.databinding.FragmentHomeBinding
 import com.example.kakaopractice.ui.search.SearchFragment
 import com.google.android.material.tabs.TabLayoutMediator

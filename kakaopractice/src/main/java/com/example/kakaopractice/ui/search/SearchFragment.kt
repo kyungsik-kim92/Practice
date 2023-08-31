@@ -37,7 +37,11 @@ class SearchFragment :
     }
 
     override fun onChangedViewState(viewState: SearchViewState) {
-
+        when (viewState) {
+            is SearchViewState.GetSearchResult -> {
+                searchBookAdapter.addAll(viewState.list)
+            }
+        }
     }
 
 

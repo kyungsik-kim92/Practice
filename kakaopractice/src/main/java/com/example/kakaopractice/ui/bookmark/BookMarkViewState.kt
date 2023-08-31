@@ -1,4 +1,4 @@
-package com.example.kakaopractice.bookmark
+package com.example.kakaopractice.ui.bookmark
 
 import com.example.kakaopractice.base.ViewState
 
