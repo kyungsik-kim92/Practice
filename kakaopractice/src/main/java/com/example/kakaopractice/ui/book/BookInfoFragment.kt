@@ -49,9 +49,17 @@ class BookInfoFragment : BaseFragment<FragmentBookInfoBinding,BookInfoViewState>
         )
 
         binding.fabFavorite.setOnClickListener {
+            if(binding.fabFavorite.isChecked){
             viewModel.addBookMark(item)
-            Snackbar.make(requireView(), "Book has saved", Snackbar.LENGTH_SHORT).show()
-        } // 이 부분 클릭 시 데이터바인딩으로 바꾸어보려고했는데 실패했습니다..
+            Snackbar.make(requireView(), "북마크에 추가 되었습니다.", Snackbar.LENGTH_SHORT).show()
+
+            }else{
+                viewModel.deleteBookMark(item)
+                Snackbar.make(requireView(), "북마크에 해제 되었습니다.", Snackbar.LENGTH_SHORT).show()
+
+
+            }
+        }
     }
 
 
