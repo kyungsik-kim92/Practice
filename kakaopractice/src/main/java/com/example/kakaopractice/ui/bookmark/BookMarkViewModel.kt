@@ -19,7 +19,7 @@ class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository) : Ba
         getFavoriteBooks()
     }
 
-    fun saveBook(item: BookMarkItem) = viewModelScope.launch {
+    fun saveBook(item: BookMarkItem) = viewModelScope.launch(Dispatchers.IO)  {
         bookMarkRepository.insertBook(item)
     }
 

@@ -16,9 +16,9 @@ class BookMarkFragment :BaseFragment<FragmentBookmarkBinding,BookMarkViewState>(
         }
     )
     private val bookmarkAdapter = BookMarkAdapter(
-        onDelete = {
-            viewModel.deleteBook(it)
-        }
+//        onDelete = {
+//            viewModel.deleteBook(it)
+//        }
     )
 
     override fun onResume() {

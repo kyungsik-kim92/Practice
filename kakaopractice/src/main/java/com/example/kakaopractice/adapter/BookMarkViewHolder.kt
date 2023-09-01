@@ -8,11 +8,11 @@ class BookMarkViewHolder(private val binding: ItemBookmarkBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(item: BookMarkItem, onDelete : (BookMarkItem) -> Unit) {
+    fun bind(item: BookMarkItem) {
         binding.bookItem = item
         binding.author.text = item.authors.toString()
-        itemView.setOnClickListener {
-            onDelete(item)
-        }
+//        itemView.setOnClickListener {
+//            onDelete(item)
+//        }
     }
 }

@@ -8,7 +8,7 @@ import com.example.kakaopractice.databinding.ItemBookmarkBinding
 import com.example.kakaopractice.databinding.ItemSearchBinding
 import com.example.kakaopractice.room.BookMarkItem
 
-class BookMarkAdapter(val onDelete: (BookMarkItem) -> Unit) :
+class BookMarkAdapter() :
     RecyclerView.Adapter<BookMarkViewHolder>() {
 
     private val bookMarkItem = mutableListOf<BookMarkItem>()
@@ -22,7 +22,7 @@ class BookMarkAdapter(val onDelete: (BookMarkItem) -> Unit) :
 
 
     override fun onBindViewHolder(holder: BookMarkViewHolder, position: Int) {
-        holder.bind(bookMarkItem[position], onDelete)
+        holder.bind(bookMarkItem[position])
     }
 
 

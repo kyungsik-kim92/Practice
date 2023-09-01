@@ -1,11 +1,12 @@
 package com.example.kakaopractice.ui.search
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.kakaopractice.base.BaseViewModel
+import com.example.kakaopractice.data.repo.BookMarkRepository
 import com.example.kakaopractice.data.repo.SearchBookRepository
 import com.example.kakaopractice.network.response.KakaoBookItem
+import com.example.kakaopractice.room.BookMarkItem
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val searchBookRepository: SearchBookRepository) : BaseViewModel() {
@@ -26,18 +27,19 @@ class SearchViewModel(private val searchBookRepository: SearchBookRepository) : 
                     onChangedViewState(SearchViewState.GetSearchResult(body.kakaoBookItems))
                 }
             }
+
         }
+
     }
 
 
+        companion object {
 
-
-    companion object {
-
-        private const val DEFAULT_SEARCH_SORT = "accuracy"
-        private const val DEFAULT_SEARCH_PAGE = 1
-        private const val DEFAULT_SEARCH_SIZE = 30
-    }
+            private const val DEFAULT_SEARCH_SORT = "accuracy"
+            private const val DEFAULT_SEARCH_PAGE = 1
+            private const val DEFAULT_SEARCH_SIZE = 30
+        }
 
 }
+
 

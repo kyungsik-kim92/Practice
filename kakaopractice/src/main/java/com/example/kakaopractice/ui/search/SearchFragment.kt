@@ -27,9 +27,12 @@ class SearchFragment :
         }
     )
 
-       private val searchBookAdapter = SearchBookAdapter(onItemClick = {
+    private val searchBookAdapter = SearchBookAdapter(
+        onItemClick = {
             homeViewModel.routeBookInfo(it)
-        }, onBookMarkClick = {bookInfoViewModel.addBookMark(it)})
+        },
+        onBookMarkInsertClick = { bookInfoViewModel.addBookMark(it) },
+        onBookMarkDeleteClick = { bookInfoViewModel.deleteBookMark(it) })
 
 
     override fun initUi() {
@@ -43,6 +46,11 @@ class SearchFragment :
         when (viewState) {
             is SearchViewState.GetSearchResult -> {
                 searchBookAdapter.addAll(viewState.list)
+            }
+
+            is SearchViewState.BookMarkResult -> {
+
+
             }
         }
     }
