@@ -27,10 +27,6 @@ class SearchViewModel(private val searchBookRepository: SearchBookRepository) : 
                 }
             }
         }
-
-
-
-
     }
 
 

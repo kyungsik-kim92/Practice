@@ -15,9 +15,8 @@ class BookInfoViewModel(private val bookMarkRepository: BookMarkRepository) : Ba
 
         viewModelScope.launch(Dispatchers.IO) {
 
-           bookMarkRepository.insertBook(item.toBookmarkItem())
+            bookMarkRepository.insertBook(item.toBookmarkItem())
             // 이 부분 BaseViewModel에 맞게 바꾸는 법을 모르겠습니다....
-
 
 
         }
@@ -25,4 +24,13 @@ class BookInfoViewModel(private val bookMarkRepository: BookMarkRepository) : Ba
     }
 
 
+    fun deleteBookMark(item: KakaoBookItem) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            bookMarkRepository.deleteBook(item.toBookmarkItem())
+        }
+
+
+    }
 }

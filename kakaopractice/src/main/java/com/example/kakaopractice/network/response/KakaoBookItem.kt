@@ -53,7 +53,7 @@ data class KakaoBookItem(
         thumbnail = thumbnail,
         title = title,
         translators = translators,
-        url = url
+        url = url,
     )
 
 }

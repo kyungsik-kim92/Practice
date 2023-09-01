@@ -13,4 +13,8 @@ class TypeConverter {
     @TypeConverter
     fun toList(value: String) = Json.decodeFromString<List<String>>(value)
 
+    @TypeConverter
+    fun fromString(value: String) = Json.decodeFromString<Int>(value)
+
+
 }

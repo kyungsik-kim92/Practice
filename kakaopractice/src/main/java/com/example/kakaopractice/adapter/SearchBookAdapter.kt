@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kakaopractice.databinding.ItemSearchBinding
 import com.example.kakaopractice.network.response.KakaoBookItem
 
-class SearchBookAdapter(val onItemClick: (KakaoBookItem) -> Unit,val onBookMarkClick : (KakaoBookItem) -> Unit) : RecyclerView.Adapter<SearchBookViewHolder>() {
+class SearchBookAdapter(
+    val onItemClick: (KakaoBookItem) -> Unit,
+    val onBookMarkClick: (KakaoBookItem) -> Unit
+) : RecyclerView.Adapter<SearchBookViewHolder>() {
 
     private val kakaoBookItem = mutableListOf<KakaoBookItem>()
 
@@ -19,7 +22,7 @@ class SearchBookAdapter(val onItemClick: (KakaoBookItem) -> Unit,val onBookMarkC
     override fun getItemCount(): Int = kakaoBookItem.size
 
     override fun onBindViewHolder(holder: SearchBookViewHolder, position: Int) {
-        holder.bind(kakaoBookItem[position],onItemClick,onBookMarkClick)
+        holder.bind(kakaoBookItem[position], onItemClick, onBookMarkClick)
     }
 
     @SuppressLint("NotifyDataSetChanged")
