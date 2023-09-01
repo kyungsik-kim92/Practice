@@ -18,6 +18,7 @@ import com.example.kakaopractice.base.BaseFragment
 import com.example.kakaopractice.databinding.FragmentBookInfoBinding
 import com.example.kakaopractice.util.BookInfoViewModelFactory
 import com.example.kakaopractice.util.InjectUtil
+import com.example.kakaopractice.util.WebViewOnBackPressedCallback
 import com.google.android.material.snackbar.Snackbar
 
 class BookInfoFragment : BaseFragment<FragmentBookInfoBinding,BookInfoViewState>(R.layout.fragment_book_info)
@@ -25,7 +26,6 @@ class BookInfoFragment : BaseFragment<FragmentBookInfoBinding,BookInfoViewState>
 
 
     private val args by navArgs<BookInfoFragmentArgs>()
-
 
 
     override val viewModel: BookInfoViewModel by viewModels(
@@ -51,7 +51,7 @@ class BookInfoFragment : BaseFragment<FragmentBookInfoBinding,BookInfoViewState>
         binding.fabFavorite.setOnClickListener {
             viewModel.addBookMark(item)
             Snackbar.make(requireView(), "Book has saved", Snackbar.LENGTH_SHORT).show()
-        }
+        } // 이 부분 클릭 시 데이터바인딩으로 바꾸어보려고했는데 실패했습니다..
     }
 
 
@@ -61,19 +61,5 @@ class BookInfoFragment : BaseFragment<FragmentBookInfoBinding,BookInfoViewState>
 //
     }
 
-
-    class WebViewOnBackPressedCallback(
-        private val webView: WebView,
-        private val onBackPress: () -> Unit
-    ) :
-        OnBackPressedCallback(webView.isEnabled) {
-        override fun handleOnBackPressed() {
-            if (webView.canGoBack()) {
-                webView.goBack()
-            } else {
-                onBackPress()
-            }
-        }
-    }
 }
 

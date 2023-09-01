@@ -6,6 +6,9 @@ import com.example.kakaopractice.adapter.SearchBookAdapter
 import com.example.kakaopractice.base.BaseFragment
 import com.example.kakaopractice.databinding.FragmentSearchBinding
 import com.example.kakaopractice.home.HomeViewModel
+import com.example.kakaopractice.ui.book.BookInfoViewModel
+import com.example.kakaopractice.util.BookInfoViewModelFactory
+import com.example.kakaopractice.util.InjectUtil
 
 
 class SearchFragment :
@@ -18,14 +21,21 @@ class SearchFragment :
         ownerProducer = { requireParentFragment() }
     )
 
+    private val bookInfoViewModel: BookInfoViewModel by viewModels(
+        factoryProducer = {
+            BookInfoViewModelFactory(InjectUtil.providerBookMarkRepository(requireContext()))
+        }
+    )
+
        private val searchBookAdapter = SearchBookAdapter(onItemClick = {
             homeViewModel.routeBookInfo(it)
-        })
+        }, onBookMarkClick = {bookInfoViewModel.addBookMark(it)})
 
 
     override fun initUi() {
         binding.viewModel = this@SearchFragment.viewModel
         binding.rvSearchResult.adapter = searchBookAdapter
+
 
     }
 
