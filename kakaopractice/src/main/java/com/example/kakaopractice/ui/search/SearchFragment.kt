@@ -7,25 +7,18 @@ import com.example.kakaopractice.base.BaseFragment
 import com.example.kakaopractice.databinding.FragmentSearchBinding
 import com.example.kakaopractice.home.HomeViewModel
 import com.example.kakaopractice.ui.book.BookInfoViewModel
-import com.example.kakaopractice.util.BookInfoViewModelFactory
-import com.example.kakaopractice.util.InjectUtil
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SearchFragment :
     BaseFragment<FragmentSearchBinding, SearchViewState>(R.layout.fragment_search) {
 
-    override val viewModel: SearchViewModel by viewModels(
-        factoryProducer = { SearchViewModelProviderFactory() }
-    )
+    override val viewModel: SearchViewModel by viewModels()
     private val homeViewModel by viewModels<HomeViewModel>(
         ownerProducer = { requireParentFragment() }
     )
 
-    private val bookInfoViewModel: BookInfoViewModel by viewModels(
-        factoryProducer = {
-            BookInfoViewModelFactory(InjectUtil.providerBookMarkRepository(requireContext()))
-        }
-    )
+    private val bookInfoViewModel: BookInfoViewModel by viewModels()
 
     private val searchBookAdapter = SearchBookAdapter(
         onItemClick = {

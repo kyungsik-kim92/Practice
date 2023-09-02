@@ -5,16 +5,12 @@ import com.example.kakaopractice.R
 import com.example.kakaopractice.adapter.BookMarkAdapter
 import com.example.kakaopractice.base.BaseFragment
 import com.example.kakaopractice.databinding.FragmentBookmarkBinding
-import com.example.kakaopractice.util.BookMarkViewModelFactory
-import com.example.kakaopractice.util.InjectUtil
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BookMarkFragment :BaseFragment<FragmentBookmarkBinding,BookMarkViewState>(R.layout.fragment_bookmark){
 
-    override val viewModel: BookMarkViewModel by viewModels(
-        factoryProducer = {
-            BookMarkViewModelFactory(InjectUtil.providerBookMarkRepository(requireContext()))
-        }
-    )
+    override val viewModel: BookMarkViewModel by viewModels()
     private val bookmarkAdapter = BookMarkAdapter(
 //        onDelete = {
 //            viewModel.deleteBook(it)

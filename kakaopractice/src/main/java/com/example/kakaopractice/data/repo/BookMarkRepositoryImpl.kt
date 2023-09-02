@@ -3,14 +3,17 @@ package com.example.kakaopractice.data.repo
 import com.example.kakaopractice.network.response.KakaoBookItem
 import com.example.kakaopractice.room.BookMarkItem
 import com.example.kakaopractice.room.BookSearchDao
+import javax.inject.Inject
 
-class BookMarkRepositoryImpl(private var bookSearchDao: BookSearchDao) : BookMarkRepository {
+
+class BookMarkRepositoryImpl @Inject constructor(private var bookSearchDao: BookSearchDao) :
+    BookMarkRepository {
     override suspend fun insertBook(item: BookMarkItem) {
         bookSearchDao.insertBook(item)
     }
 
     override suspend fun deleteBook(item: BookMarkItem) {
-    bookSearchDao.deleteBook(item)
+        bookSearchDao.deleteBook(item)
     }
 
     override fun getFavoriteBooks(): List<BookMarkItem> {
@@ -18,10 +21,4 @@ class BookMarkRepositoryImpl(private var bookSearchDao: BookSearchDao) : BookMar
     }
 
 
-    companion object {
-        private var INSTANCE: BookMarkRepositoryImpl? = null
-
-        fun getInstance(bookSearchDao: BookSearchDao): BookMarkRepository =
-            INSTANCE ?: BookMarkRepositoryImpl(bookSearchDao).also { INSTANCE = it }
-    }
 }

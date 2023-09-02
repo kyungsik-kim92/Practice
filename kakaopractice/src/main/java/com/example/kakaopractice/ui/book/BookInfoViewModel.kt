@@ -4,10 +4,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.kakaopractice.base.BaseViewModel
 import com.example.kakaopractice.data.repo.BookMarkRepository
 import com.example.kakaopractice.network.response.KakaoBookItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BookInfoViewModel(private val bookMarkRepository: BookMarkRepository) : BaseViewModel() {
+@HiltViewModel
+class BookInfoViewModel@Inject constructor(private val bookMarkRepository: BookMarkRepository) : BaseViewModel() {
 
 
     fun addBookMark(item: KakaoBookItem) {

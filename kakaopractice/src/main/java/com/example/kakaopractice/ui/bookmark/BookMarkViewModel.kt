@@ -1,17 +1,18 @@
 package com.example.kakaopractice.ui.bookmark
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kakaopractice.base.BaseViewModel
 import com.example.kakaopractice.data.repo.BookMarkRepository
 import com.example.kakaopractice.room.BookMarkItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository) : BaseViewModel() {
+@HiltViewModel
+class BookMarkViewModel @Inject constructor(private val bookMarkRepository: BookMarkRepository) :
+    BaseViewModel() {
 
 //    private val bookMarkBooks = MutableLiveData<List<BookMarkItem>>()
 
@@ -19,7 +20,7 @@ class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository) : Ba
         getFavoriteBooks()
     }
 
-    fun saveBook(item: BookMarkItem) = viewModelScope.launch(Dispatchers.IO)  {
+    fun saveBook(item: BookMarkItem) = viewModelScope.launch(Dispatchers.IO) {
         bookMarkRepository.insertBook(item)
     }
 
@@ -28,7 +29,7 @@ class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository) : Ba
         getFavoriteBooks()
     }
 
-     fun getFavoriteBooks() {
+    fun getFavoriteBooks() {
         viewModelScope.launch(Dispatchers.IO) {
 
             val bookmarkList = bookMarkRepository.getFavoriteBooks()
