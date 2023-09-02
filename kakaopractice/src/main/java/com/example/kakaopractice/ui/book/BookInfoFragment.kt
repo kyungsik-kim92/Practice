@@ -38,8 +38,8 @@ class BookInfoFragment : BaseFragment<FragmentBookInfoBinding,BookInfoViewState>
             })
         )
 
-        binding.fabFavorite.setOnClickListener {
-            if(binding.fabFavorite.isChecked){
+        binding.fabFavorite.setOnCheckedChangeListener {_, isChecked ->
+            if(isChecked){
             viewModel.addBookMark(item)
             Snackbar.make(requireView(), "북마크에 추가 되었습니다.", Snackbar.LENGTH_SHORT).show()
 

@@ -25,6 +25,8 @@ class SearchBookAdapter(
 
     override fun onBindViewHolder(holder: SearchBookViewHolder, position: Int) {
         holder.bind(kakaoBookItem[position], onItemClick, onBookMarkInsertClick,onBookMarkDeleteClick)
+//
+
     }
 
 
