@@ -19,11 +19,11 @@ interface BookSearchDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBook(item: BookMarkItem)
+    suspend fun insertBook(item: BookMarkItem) : Long
 
 
     @Delete
-    suspend fun deleteBook(item: BookMarkItem)
+    suspend fun deleteBook(item: BookMarkItem) : Int
 
 
     @Query("SELECT * FROM book")

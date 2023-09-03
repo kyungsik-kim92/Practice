@@ -5,7 +5,7 @@ import com.example.kakaopractice.room.BookMarkItem
 
 interface BookMarkRepository {
 
-    suspend fun insertBook(item: BookMarkItem)
-    suspend fun deleteBook(item: BookMarkItem)
+    suspend fun insertBook(item: BookMarkItem) : Long
+    suspend fun deleteBook(item: BookMarkItem) : Int
     fun getFavoriteBooks() : List<BookMarkItem>
 }

@@ -1,5 +1,6 @@
 package com.example.kakaopractice.util
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.kakaopractice.ui.bookmark.BookMarkViewModel
 import com.example.kakaopractice.data.repo.BookMarkRepository
@@ -13,9 +14,12 @@ class BookMarkViewModelFactory (private val bookMarkRepository: BookMarkReposito
 }
 
 
-class BookInfoViewModelFactory(private val bookMarkRepository: BookMarkRepository) :
+class BookInfoViewModelFactory(
+    private val savedStateHandle: SavedStateHandle,
+    private val bookMarkRepository: BookMarkRepository
+) :
     androidx.lifecycle.ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return BookInfoViewModel(bookMarkRepository) as T
+        return BookInfoViewModel(savedStateHandle,bookMarkRepository) as T
     }
 }

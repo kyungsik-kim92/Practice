@@ -26,7 +26,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadUrl="@{bookItem.url}" />
 
 
         <CheckBox
@@ -35,13 +36,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:button="@null"
             android:background="@drawable/btn_star"
             android:backgroundTint="#d070fb"
+            android:button="@null"
+            android:checked="@={viewModel.isBookmark()}"
+            android:onCheckedChanged="@{(_, isChecked) -> viewModel.onCheckedChanged(isChecked)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-         <!--   android:onClick="@{()-> viewModel.addBookMark(bookItem)}"
-         데이터바인딩 시도해보려다가 실패했습니다-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

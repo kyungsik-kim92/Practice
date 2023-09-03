@@ -1,5 +1,6 @@
 package com.example.kakaopractice.home
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.kakaopractice.R
@@ -47,6 +48,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewState>(R.layout.f
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToBookInfoFragment(viewState.item)
                 findNavController().navigate(action)
+            }
+
+            is HomeViewState.AddBookmark -> {
+                Log.d("결과", viewState.toString())
+            }
+            is HomeViewState.DeleteBookmark -> {
+                Log.d("결과", viewState.toString())
             }
         }
     }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.kakaopractice.ui.search.SearchViewModel" />
@@ -18,30 +19,40 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tl_search"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Search.."
             android:padding="4dp"
             app:layout_constraintBottom_toTopOf="@id/rv_search_result"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".8">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_search"
-                android:layout_width="300dp"
-                android:text="@={viewModel.inputSearchLiveData}"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.inputSearchLiveData}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_search"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="search"
+            android:autoSizeMaxTextSize="20dp"
+            android:autoSizeMinTextSize="5dp"
+            android:padding="10dp"
+            android:autoSizeTextType="uniform"
+            android:lines="1"
             android:onClick="@{()-> viewModel.searchBooks()}"
+            android:text="search"
             app:layout_constraintBottom_toBottomOf="@id/tl_search"
-            app:layout_constraintEnd_toEndOf="@id/tl_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tl_search"
             app:layout_constraintTop_toTopOf="@id/tl_search" />
 
         <androidx.recyclerview.widget.RecyclerView
