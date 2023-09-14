@@ -1,5 +1,6 @@
 package com.example.marvelapipractice.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,5 +20,15 @@ class MarvelAdapter : RecyclerView.Adapter<MarvelViewHolder>() {
 
     override fun onBindViewHolder(holder: MarvelViewHolder, position: Int) {
         holder.bind(characterItem[position])
+    }
+
+
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addAll(list: List<Result>) {
+        characterItem.clear()
+        characterItem.addAll(list)
+        notifyDataSetChanged()
     }
 }
