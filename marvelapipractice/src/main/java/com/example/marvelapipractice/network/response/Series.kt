@@ -1,9 +1,9 @@
-package com.example.marvelapipractice.model
+package com.example.marvelapipractice.network.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Events(
+data class Series(
     @SerializedName("available")
     val available: Int,
     @SerializedName("collectionURI")

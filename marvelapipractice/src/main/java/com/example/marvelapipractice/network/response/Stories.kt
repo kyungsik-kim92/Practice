@@ -1,15 +1,15 @@
-package com.example.marvelapipractice.model
+package com.example.marvelapipractice.network.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Comics(
+data class Stories(
     @SerializedName("available")
     val available: Int,
     @SerializedName("collectionURI")
     val collectionURI: String,
     @SerializedName("items")
-    val items: List<Item>,
+    val items: List<ItemXXX>,
     @SerializedName("returned")
     val returned: Int
 )

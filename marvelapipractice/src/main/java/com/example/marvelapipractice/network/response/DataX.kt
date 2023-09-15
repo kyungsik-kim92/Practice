@@ -1,4 +1,4 @@
-package com.example.marvelapipractice.model
+package com.example.marvelapipractice.network.response
 
 
 import com.google.gson.annotations.SerializedName
