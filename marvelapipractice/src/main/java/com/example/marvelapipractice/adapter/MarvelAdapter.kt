@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelapipractice.databinding.ItemSearchBinding
 import com.example.marvelapipractice.model.Result
 
-class MarvelAdapter : RecyclerView.Adapter<MarvelViewHolder>() {
+class MarvelAdapter(private val characterItem: List<Result>) : RecyclerView.Adapter<MarvelViewHolder>() {
 
-    private val characterItem = mutableListOf<Result>()
+//    private val characterItem = mutableListOf<Result>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarvelViewHolder {
         val binding = ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,10 +25,10 @@ class MarvelAdapter : RecyclerView.Adapter<MarvelViewHolder>() {
 
 
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun addAll(list: List<Result>) {
-        characterItem.clear()
-        characterItem.addAll(list)
-        notifyDataSetChanged()
-    }
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun addAll(list: List<Result>) {
+//        characterItem.clear()
+//        characterItem.addAll(list)
+//        notifyDataSetChanged()
+//    }
 }
