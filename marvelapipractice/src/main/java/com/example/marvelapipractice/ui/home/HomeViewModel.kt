@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvelapipractice.data.repo.MarvelRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(private val marvelRepository: MarvelRepository) : ViewModel() {
-
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepository) :
+    ViewModel() {
 
     private val _homeViewStateLiveData = MutableLiveData<HomeViewState>()
     val homeViewStateLiveData: LiveData<HomeViewState> = _homeViewStateLiveData

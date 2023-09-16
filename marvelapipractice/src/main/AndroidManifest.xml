@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:appComponentFactory="androidx"
         android:icon="@mipmap/ic_launcher"

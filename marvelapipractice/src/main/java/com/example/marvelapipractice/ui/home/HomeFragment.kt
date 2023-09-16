@@ -11,13 +11,13 @@ import com.example.marvelapipractice.R
 import com.example.marvelapipractice.databinding.FragmentHomeBinding
 import com.example.marvelapipractice.ext.showToast
 import com.example.marvelapipractice.ui.adapter.MarvelAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel: HomeViewModel by viewModels(
-        factoryProducer = { HomeViewModelFactory() }
-    )
+    private val viewModel: HomeViewModel by viewModels()
 
     private val marvelAdapter = MarvelAdapter()
 
