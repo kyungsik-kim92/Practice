@@ -24,6 +24,8 @@
 
             <ImageView
                 android:id="@+id/image"
+                saveToGalleryForClickImage="@{true}"
+                setUrlImg="@{result.thumbnail.url}"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -31,9 +33,7 @@
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.5"
-                setUrlImg="@{result.thumbnail.url}"
-                />
+                app:layout_constraintWidth_percent="0.5" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -41,9 +41,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:ellipsize="marquee"
+                android:gravity="center"
                 android:lines="1"
                 android:maxLines="1"
-                android:gravity="center"
                 android:text="@{result.name}"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -59,8 +59,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:text="@{result.summary}"
                 android:gravity="center"
+                android:text="@{result.summary}"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
