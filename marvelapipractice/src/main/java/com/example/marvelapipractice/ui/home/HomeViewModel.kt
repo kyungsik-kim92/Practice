@@ -2,15 +2,16 @@ package com.example.marvelapipractice.ui.home
 
 import androidx.lifecycle.viewModelScope
 import com.example.marvelapipractice.base.BaseViewModel
-import com.example.marvelapipractice.data.repo.MarvelRepository
+import com.example.marvelapipractice.domain.usecase.GetMarvelCharacterUseCase
+import com.example.marvelapipractice.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepository) :
+class HomeViewModel @Inject constructor(private val getMarvelCharacterUseCase: GetMarvelCharacterUseCase) :
     BaseViewModel() {
 
     private var offsetCount = INIT_OFFSET
@@ -18,7 +19,7 @@ class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepo
     private var isStartSearch = AtomicBoolean(false)
 
     val isScrollBottomPosition: Function1<Boolean, Unit> = { isBottom ->
-        if(isBottom && !isStartSearch.get()) {
+        if (isBottom && !isStartSearch.get()) {
             isStartSearch.set(true)
             getCharacter()
         }
@@ -31,24 +32,26 @@ class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepo
     private fun getCharacter(
         isRefresh: Boolean = false,
         offset: Int = offsetCount,
-        limit: Int = LIMIT_COUNT
     ) {
-        viewModelScope.launch(IO) {
-            val characters = marvelRepository.getCharacters(offset = offset, limit = limit)
-            if (characters.isSuccessful) {
-                characters.body()?.let {
-                    if (isRefresh) onChangedViewState(HomeViewState.Refresh(it.data.results))
-                    else {
-                        offsetCount += it.data.count
-                        onChangedViewState(HomeViewState.GetData(it.data.results))
-                    }
-                } ?: onChangedViewState(HomeViewState.ShowToast("실패"))
-            } else {
-                onChangedViewState(HomeViewState.ShowToast("실패"))
-            }
-            isStartSearch.set(false)
-        }
+        getMarvelCharacterUseCase(offset = offset).onEach { result ->
+            when (result) {
+                is Resource.Error -> {
+                    onChangedViewState(
+                        HomeViewState.ShowToast(
+                            result.exception?.message ?: "Unknown Error"
+                        )
+                    )
+                    isStartSearch.set(false)
+                }
 
+                is Resource.Success -> {
+                    offsetCount += result.data.count
+                    if (isRefresh) onChangedViewState(HomeViewState.Refresh(result.data.results))
+                    else onChangedViewState(HomeViewState.GetData(result.data.results))
+                    isStartSearch.set(false)
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
     fun refresh() {
@@ -57,10 +60,8 @@ class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepo
     }
 
 
-
     companion object {
         private const val INIT_OFFSET = 0
-        private const val LIMIT_COUNT = 20
     }
 }
 
