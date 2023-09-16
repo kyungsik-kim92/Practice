@@ -2,15 +2,11 @@ package com.example.marvelapipractice.data.repo
 
 import com.example.marvelapipractice.network.response.Character
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Url
 
-interface HomeRepository {
+interface MarvelRepository {
 
-
-    @GET
-    suspend fun getAllCharacters(
-        @Url url:String,
-//
+    suspend fun getCharacters(
+        offset : Int,
+        limit : Int,
     ): Response<Character>
 }

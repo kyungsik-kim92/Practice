@@ -8,4 +8,8 @@ data class Thumbnail(
     val extension: String,
     @SerializedName("path")
     val path: String
-)
+) {
+    fun getUrl(): String {
+        return "$path.$extension"
+    }
+}

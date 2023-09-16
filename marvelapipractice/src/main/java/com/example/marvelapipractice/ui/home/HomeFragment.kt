@@ -1,6 +1,5 @@
 package com.example.marvelapipractice.ui.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,43 +8,43 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.marvelapipractice.R
-import com.example.marvelapipractice.adapter.MarvelAdapter
-import com.example.marvelapipractice.data.repo.HomeRepository
 import com.example.marvelapipractice.databinding.FragmentHomeBinding
-import com.example.marvelapipractice.network.response.Result
+import com.example.marvelapipractice.ext.showToast
+import com.example.marvelapipractice.ui.adapter.MarvelAdapter
 
 class HomeFragment : Fragment() {
-    lateinit var binding : FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
+
     private val viewModel: HomeViewModel by viewModels(
-        factoryProducer = {HomeViewModelFactory()}
+        factoryProducer = { HomeViewModelFactory() }
     )
 
-    private lateinit var recyclerViewAdapter : MarvelAdapter
-    private val marvelCharacters = mutableListOf<Result>()
-
+    private val marvelAdapter = MarvelAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        return binding. root
+        return binding.root
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.rvCharacter.adapter = marvelAdapter
 
-        recyclerViewAdapter = MarvelAdapter(marvelCharacters)
-        binding.rvCharacter.adapter = recyclerViewAdapter
+        viewModel.homeViewStateLiveData.observe(viewLifecycleOwner) { viewState ->
+            when (viewState) {
+                is HomeViewState.GetData -> {
+                    marvelAdapter.addAll(viewState.result)
+                }
 
-        viewModel.bookmarkCharacter.observe(viewLifecycleOwner){
-            viewModel.searchCharacter()
-
-
+                is HomeViewState.ShowToast -> {
+                    showToast(viewState.message)
+                }
+            }
         }
-        recyclerViewAdapter.notifyDataSetChanged()
     }
 }

@@ -1,13 +1,11 @@
 package com.example.marvelapipractice.util
 
-import com.example.marvelapipractice.data.repo.HomeRepository
-import com.example.marvelapipractice.data.repo.HomeRepositoryImpl
+import com.example.marvelapipractice.data.repo.MarvelRepository
+import com.example.marvelapipractice.data.repo.MarvelRepositoryImpl
 
 object InjectUtil {
 
-
-    fun provideHomeRepository(): HomeRepository =
-        HomeRepositoryImpl.getInstance()
-
+    fun provideHomeRepository(): MarvelRepository =
+        MarvelRepositoryImpl.getInstance()
 
 }

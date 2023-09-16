@@ -1,53 +1,46 @@
 package com.example.marvelapipractice.ui.home
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.marvelapipractice.api.RetrofitInstance
-import com.example.marvelapipractice.api.constants.Constants
-import com.example.marvelapipractice.api.constants.Constants.API_KEY
-import com.example.marvelapipractice.api.constants.Constants.hash
-import com.example.marvelapipractice.api.constants.Constants.timeStamp
-import com.example.marvelapipractice.data.repo.HomeRepository
-import com.example.marvelapipractice.network.response.Character
-import com.example.marvelapipractice.network.response.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import androidx.lifecycle.viewModelScope
+import com.example.marvelapipractice.data.repo.MarvelRepository
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Response
 
-class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel(private val marvelRepository: MarvelRepository) : ViewModel() {
 
 
+    private val _homeViewStateLiveData = MutableLiveData<HomeViewState>()
+    val homeViewStateLiveData: LiveData<HomeViewState> = _homeViewStateLiveData
 
-    private val _bookmarkCharacter = MutableLiveData<MutableList<Result>>()
-    val bookmarkCharacter: LiveData<MutableList<Result>> = _bookmarkCharacter
+    init {
+        getCharacter()
+    }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun searchCharacter() {
-        CoroutineScope(Dispatchers.IO).launch {
+    private fun getCharacter(offset: Int = INIT_OFFSET, limit: Int = LIMIT_COUNT) {
+        viewModelScope.launch(IO) {
 
-            val call: Response<Character> = homeRepository.getAllCharacters(
-                "/v1/public/characters?" + "ts=" + timeStamp + "&apikey=" + API_KEY + "&hash=" + hash()
-            )
-            val characters : List<Result>? = call.body()?.data?.results
-            withContext(Dispatchers.Main) {
-                if(call.isSuccessful) {
-                    _bookmarkCharacter.value?.clear()
-                    if (characters != null) {
-                        _bookmarkCharacter.value?.addAll(characters)
-
-                    }
-                } else {
-
-                }
+            val characters = marvelRepository.getCharacters(offset = offset, limit = limit)
+            if (characters.isSuccessful) {
+                characters.body()?.let {
+                    onChangedHomeViewState(HomeViewState.GetData(it.data.results))
+                } ?: onChangedHomeViewState(HomeViewState.ShowToast("실패"))
+            } else {
+                onChangedHomeViewState(HomeViewState.ShowToast("실패"))
             }
         }
     }
 
+    private fun onChangedHomeViewState(viewState: HomeViewState) = viewModelScope.launch {
+        _homeViewStateLiveData.value = viewState
+    }
 
+
+    companion object {
+        private const val INIT_OFFSET = 0
+        private const val LIMIT_COUNT = 20
+    }
 }
 
 

@@ -26,4 +26,10 @@ data class Result(
     val thumbnail: Thumbnail,
     @SerializedName("urls")
     val urls: List<Url>
-)
+) {
+    fun getSummary(): String =
+        """
+            Url : ${urls.size} Events : ${events.available} Comics : ${comics.available}
+            Stories : ${stories.available} Series : ${series.available}
+        """.trimIndent()
+}

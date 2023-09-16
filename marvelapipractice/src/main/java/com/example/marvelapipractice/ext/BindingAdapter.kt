@@ -1,10 +1,16 @@
 package com.example.marvelapipractice.ext
 
-//@BindingAdapter("imageUrl")
-//fun loadImage(view: ImageView, thumbnail: Thumbnail) {
-//
-//    val uri = thumbnail.path+"."+thumbnail.extension
-//
-//    Glide.with(view.context).load(uri).into(view)
-//}
-//
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+
+@BindingAdapter("setUrlImg")
+fun ImageView.setUrlImg(url : String?) {
+    Glide.with(context)
+        .load(url)
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(15)))
+        .into(this)
+}
+
