@@ -1,9 +1,7 @@
 package com.example.marvelapipractice.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.marvelapipractice.base.BaseViewModel
 import com.example.marvelapipractice.data.repo.MarvelRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -13,10 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepository) :
-    ViewModel() {
-
-    private val _homeViewStateLiveData = MutableLiveData<HomeViewState>()
-    val homeViewStateLiveData: LiveData<HomeViewState> = _homeViewStateLiveData
+    BaseViewModel() {
 
     private var offsetCount = INIT_OFFSET
 
@@ -42,14 +37,14 @@ class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepo
             val characters = marvelRepository.getCharacters(offset = offset, limit = limit)
             if (characters.isSuccessful) {
                 characters.body()?.let {
-                    if (isRefresh) onChangedHomeViewState(HomeViewState.Refresh(it.data.results))
+                    if (isRefresh) onChangedViewState(HomeViewState.Refresh(it.data.results))
                     else {
                         offsetCount += it.data.count
-                        onChangedHomeViewState(HomeViewState.GetData(it.data.results))
+                        onChangedViewState(HomeViewState.GetData(it.data.results))
                     }
-                } ?: onChangedHomeViewState(HomeViewState.ShowToast("실패"))
+                } ?: onChangedViewState(HomeViewState.ShowToast("실패"))
             } else {
-                onChangedHomeViewState(HomeViewState.ShowToast("실패"))
+                onChangedViewState(HomeViewState.ShowToast("실패"))
             }
             isStartSearch.set(false)
         }
@@ -61,9 +56,6 @@ class HomeViewModel @Inject constructor(private val marvelRepository: MarvelRepo
         getCharacter(isRefresh = true)
     }
 
-    private fun onChangedHomeViewState(viewState: HomeViewState) = viewModelScope.launch {
-        _homeViewStateLiveData.value = viewState
-    }
 
 
     companion object {
