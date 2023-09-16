@@ -6,4 +6,6 @@ sealed class HomeViewState {
     data class GetData(val result: List<Result>) : HomeViewState()
 
     data class ShowToast(val message : String) : HomeViewState()
+
+    data class Refresh(val result: List<Result>) : HomeViewState()
 }

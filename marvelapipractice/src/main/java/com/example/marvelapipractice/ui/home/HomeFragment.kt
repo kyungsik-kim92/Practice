@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = this.viewModel
         binding.rvCharacter.adapter = marvelAdapter
 
         viewModel.homeViewStateLiveData.observe(viewLifecycleOwner) { viewState ->
@@ -43,6 +44,12 @@ class HomeFragment : Fragment() {
 
                 is HomeViewState.ShowToast -> {
                     showToast(viewState.message)
+                }
+
+                is HomeViewState.Refresh -> {
+                    marvelAdapter.clear()
+                    marvelAdapter.addAll(viewState.result)
+                    binding.containerSwipeRefresh.isRefreshing = false
                 }
             }
         }

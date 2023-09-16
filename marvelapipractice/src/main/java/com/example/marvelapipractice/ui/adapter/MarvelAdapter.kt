@@ -12,7 +12,8 @@ class MarvelAdapter : RecyclerView.Adapter<MarvelViewHolder>() {
     private val characterItem = mutableListOf<Result>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarvelViewHolder {
-        val binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MarvelViewHolder(binding)
     }
 
@@ -24,8 +25,14 @@ class MarvelAdapter : RecyclerView.Adapter<MarvelViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun addAll(list: List<Result>) {
-        characterItem.clear()
+        val beforeSize = characterItem.size
         characterItem.addAll(list)
+        val afterSize = characterItem.size
+        notifyItemRangeChanged(beforeSize, afterSize)
+    }
+
+    fun clear() {
+        characterItem.clear()
         notifyDataSetChanged()
     }
 
