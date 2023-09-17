@@ -1,7 +1,5 @@
 package com.example.kakaopractice.ui.book
 
-import android.util.Log
-import android.widget.CompoundButton
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope

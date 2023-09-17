@@ -8,8 +8,5 @@
         android:id="@+id/homeFragment"
         android:name="com.example.marvelapipractice.ui.home.HomeFragment"
         android:label="HomeFragment" />
-    <fragment
-        android:id="@+id/bookmarkFragment"
-        android:name="com.example.marvelapipractice.ui.bookmark.BookmarkFragment"
-        android:label="BookmarkFragment" />
+
 </navigation>
