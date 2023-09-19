@@ -31,15 +31,15 @@ class MainActivity : AppCompatActivity() {
 //        initViews()
 //        setUpCountDownTimer()
         binding.btnStart.setOnClickListener {
-            viewModel.customTimerDuration.observe(this){
-                binding.count.text = it.toString().removeLastNchars(it.toString(),3)
+            viewModel.customTimerDuration.observe(this) {
+                binding.count.text = removeLastNchars(it.toString(), 3)
                 viewModel.timerJob.start()
 
             }
         }
     }
 
-    fun String.removeLastNchars(str: String, n: Int): String {
+    private fun removeLastNchars(str: String, n: Int): String {
         return str.substring(0, str.length - n)
     }
 //    private fun setUpCountDownTimer() {
