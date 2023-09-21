@@ -2,6 +2,8 @@ package com.example.timerpractice
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.timerpractice.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,11 +17,11 @@ class MainActivity : AppCompatActivity() {
 
     //    private val coroutineScopeMainImmediate = CoroutineScope(Dispatchers.Main.immediate)
 //    private lateinit var timer: CountDownTimer
-    private var job: Job? = null
+//    private var job: Job? = null
 
-//    private val viewModel: MainViewModel by lazy {
-//        ViewModelProvider(this)[MainViewModel::class.java]
-//    }
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,22 +38,26 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         binding.btnStart.setOnClickListener {
-
-            job?.cancel()
-            job = CoroutineScope(Dispatchers.Main).launch {
-                for (i in 10 downTo 0) {
-                    binding.count.text = "$i"
-                    delay(1000) // 1초 대기
+            lifecycleScope.launch {
+                viewModel.resetCountdown()
+                viewModel.countdownState.collect { countdown ->
+                    binding.count.text = "$countdown"
+                    if (countdown == 0) {
+                        binding.count.text = "시간 종료!"
+                    }
                 }
-                binding.count.text = "시간 종료!"
+
+//            job?.cancel()
+//            job = CoroutineScope(Dispatchers.Main).launch {
+//                for (i in 10 downTo 0) {
+//                    binding.count.text = "$i"
+//                    delay(1000) // 1초 대기
+//                }
+//                binding.count.text = "시간 종료!"
+//            }
             }
         }
     }
-override fun onDestroy() {
-    super.onDestroy()
-    job?.cancel()
-}
-
 }
 
 
