@@ -8,8 +8,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
+import kotlinx.coroutines.launch
 
-abstract class BaseFragment<B : ViewDataBinding,VS : ViewState>(@LayoutRes private val layoutId: Int) : Fragment(){
+abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutId: Int) : Fragment(){
 
     abstract val viewModel: BaseViewModel
 
@@ -34,14 +36,12 @@ abstract class BaseFragment<B : ViewDataBinding,VS : ViewState>(@LayoutRes priva
     abstract fun initUi()
 
     private fun initViewModel() {
-        viewModel.viewStateLiveData.observe(viewLifecycleOwner) { viewState ->
-            (viewState as? VS)?.let {
-                onChangedViewState(viewState)
-            }
+        viewLifecycleOwner.lifecycle.coroutineScope.launch {
+            viewModel.uiEvent.collect(::onChangedUiEvent)
         }
     }
 
-    abstract fun onChangedViewState(viewState: VS)
+    abstract fun onChangedUiEvent(viewEvent: ViewEvent)
 
 
 }

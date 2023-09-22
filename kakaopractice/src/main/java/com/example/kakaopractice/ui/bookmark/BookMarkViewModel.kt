@@ -2,10 +2,12 @@ package com.example.kakaopractice.ui.bookmark
 
 import androidx.lifecycle.viewModelScope
 import com.example.kakaopractice.base.BaseViewModel
+import com.example.kakaopractice.base.ViewEvent
 import com.example.kakaopractice.data.repo.BookMarkRepository
 import com.example.kakaopractice.room.BookMarkItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -39,4 +41,6 @@ class BookMarkViewModel @Inject constructor(private val bookMarkRepository: Book
             }
         }
     }
+
+
 }

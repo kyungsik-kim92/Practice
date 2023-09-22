@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BookInfoFragment :
-    BaseFragment<FragmentBookInfoBinding, BookInfoViewState>(R.layout.fragment_book_info) {
+    BaseFragment<FragmentBookInfoBinding>(R.layout.fragment_book_info) {
 
 
     private val args by navArgs<BookInfoFragmentArgs>()

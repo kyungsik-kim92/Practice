@@ -7,6 +7,7 @@ import com.example.kakaopractice.MainViewState
 import com.example.kakaopractice.R
 import com.example.kakaopractice.adapter.SearchBookAdapter
 import com.example.kakaopractice.base.BaseFragment
+import com.example.kakaopractice.base.ViewEvent
 import com.example.kakaopractice.databinding.FragmentSearchBinding
 import com.example.kakaopractice.home.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -14,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment :
-    BaseFragment<FragmentSearchBinding, SearchViewState>(R.layout.fragment_search) {
+    BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
     override val viewModel: SearchViewModel by viewModels()
     private val homeViewModel by viewModels<HomeViewModel>(
@@ -30,10 +31,10 @@ class SearchFragment :
             homeViewModel.routeBookInfo(it)
         },
         onBookMarkInsertClick = { item ->
-            viewModel?.addBookMark(item)
+            viewModel.addBookMark(item)
         },
         onBookMarkDeleteClick = { item ->
-            viewModel?.deleteBookMark(item)
+            viewModel.deleteBookMark(item)
         }
     )
 
@@ -55,6 +56,11 @@ class SearchFragment :
                 }
             }
         }
+    }
+
+    override fun onChangedUiEvent(viewEvent: ViewEvent) {
+
+
     }
 
     override fun onChangedViewState(viewState: SearchViewState) {

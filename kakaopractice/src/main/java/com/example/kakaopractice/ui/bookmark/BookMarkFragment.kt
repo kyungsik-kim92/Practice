@@ -4,11 +4,12 @@ import androidx.fragment.app.viewModels
 import com.example.kakaopractice.R
 import com.example.kakaopractice.adapter.BookMarkAdapter
 import com.example.kakaopractice.base.BaseFragment
+import com.example.kakaopractice.base.ViewEvent
 import com.example.kakaopractice.databinding.FragmentBookmarkBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BookMarkFragment :BaseFragment<FragmentBookmarkBinding,BookMarkViewState>(R.layout.fragment_bookmark){
+class BookMarkFragment :BaseFragment<FragmentBookmarkBinding>(R.layout.fragment_bookmark){
 
     override val viewModel: BookMarkViewModel by viewModels()
     private val bookmarkAdapter = BookMarkAdapter(
@@ -25,6 +26,10 @@ class BookMarkFragment :BaseFragment<FragmentBookmarkBinding,BookMarkViewState>(
 
     override fun initUi() {
         binding.rvFavoriteBooks.adapter = bookmarkAdapter
+    }
+
+    override fun onChangedUiEvent(viewEvent: ViewEvent) {
+
     }
 
     override fun onChangedViewState(viewState: BookMarkViewState) {

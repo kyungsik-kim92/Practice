@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-abstract class BaseActivity<B : ViewDataBinding, VS : ViewState>(@LayoutRes private val layoutId: Int) :
+abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
     AppCompatActivity() {
 
     abstract val viewModel: BaseViewModel
@@ -26,14 +29,15 @@ abstract class BaseActivity<B : ViewDataBinding, VS : ViewState>(@LayoutRes priv
     abstract fun initUi()
 
     private fun initViewModel() {
-        viewModel.viewStateLiveData.observe(this) { viewState ->
-            (viewState as? VS)?.let {
-                onChangedViewState(viewState)
-            }
+        lifecycleScope.launch {
+
+            viewModel.uiEvent.collect(::onChangedUiState)
         }
     }
 
-    abstract fun onChangedViewState(viewState: VS)
-
+    abstract fun onChangedUiState(viewState: ViewEvent)
 
 }
+
+
+

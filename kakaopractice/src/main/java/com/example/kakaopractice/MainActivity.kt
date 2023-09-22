@@ -1,30 +1,28 @@
 package com.example.kakaopractice
 
-import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.kakaopractice.base.BaseViewModel
-import com.example.kakaopractice.base.ViewState
-import com.example.kakaopractice.data.repo.SearchBookRepositoryImpl
-import com.example.kakaopractice.databinding.ActivityMainBinding
+import com.example.kakaopractice.base.ViewEvent
 import com.example.kakaopractice.network.response.KakaoBookItem
-import com.example.kakaopractice.ui.search.SearchFragment
-import com.example.kakaopractice.ui.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
-    private val mainViewModel by viewModels<MainViewModel>()
+//    private val mainViewModel by viewModels<MainViewModel>()
+
+
 }
 
 
 @HiltViewModel
 class MainViewModel @Inject constructor() : BaseViewModel() {
+
 
     fun addBookmark(item: KakaoBookItem) {
         onChangedViewState(MainViewState.AddBookmark(item))
@@ -34,10 +32,13 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
         onChangedViewState(MainViewState.DeleteBookmark(item))
     }
 
+    override val uiEvent: Flow<ViewEvent>
+        get() = TODO("Not yet implemented")
+
 }
 
 
-sealed class MainViewState : ViewState {
+sealed class MainViewState : BaseViewModel.ViewState {
     data class AddBookmark(val item: KakaoBookItem) : MainViewState()
     data class DeleteBookmark(val item: KakaoBookItem) : MainViewState()
 }
