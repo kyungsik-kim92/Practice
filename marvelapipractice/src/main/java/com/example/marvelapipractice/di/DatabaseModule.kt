@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.example.marvelapipractice.room.MarvelDao
 import com.example.marvelapipractice.room.MarvelDatabase
-import com.example.marvelapipractice.util.ItemTypeConverter
-import com.example.marvelapipractice.util.UrlTypeConverter
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -18,11 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    @Singleton
-    @Provides
-    fun provideGson(): Gson {
-        return Gson()
-    }
 
     @Provides
     @Singleton
@@ -32,8 +25,7 @@ object DatabaseModule {
             MarvelDatabase::class.java,
             "marvel-character"
         ).fallbackToDestructiveMigration()
-            .addTypeConverter(UrlTypeConverter(gson))
-            .addTypeConverter(ItemTypeConverter(gson))
+
             .build()
 
 

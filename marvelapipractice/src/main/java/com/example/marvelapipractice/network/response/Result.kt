@@ -8,12 +8,10 @@ import com.google.gson.annotations.SerializedName
 
 @Entity("result")
 data class Result(
-    @Embedded
     @SerializedName("comics")
     val comics: Comics,
     @SerializedName("description")
     val description: String,
-    @Embedded
     @SerializedName("events")
     val events: Events,
     @PrimaryKey
@@ -25,13 +23,10 @@ data class Result(
     val name: String,
     @SerializedName("resourceURI")
     val resourceURI: String,
-    @Embedded
     @SerializedName("series")
     val series: Series,
-    @Embedded
     @SerializedName("stories")
     val stories: Stories,
-    @Embedded
     @SerializedName("thumbnail")
     val thumbnail: Thumbnail,
     @SerializedName("urls")
